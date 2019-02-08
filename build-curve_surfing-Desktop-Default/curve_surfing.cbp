@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="curve_surfing"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\external\;CMake Files\external\glfw\;CMake Files\external\glfw\CMake\;CMake Files\external\glfw\CMake\modules\;CMake Files\external\glfw\src\;CMake Files\resources\;CMake Files\resources\curves\;CMake Files\resources\shaders\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glad">
+				<Option output="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/libglad.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 glad"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glad/fast">
+				<Option output="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/libglad.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 glad/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="curve_surfing">
+				<Option output="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/curve_surfing" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DGLFW_INCLUDE_NONE"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/geometry"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/scene"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 curve_surfing"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="curve_surfing/fast">
+				<Option output="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/curve_surfing" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DGLFW_INCLUDE_NONE"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/geometry"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/scene"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 curve_surfing/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glfw">
+				<Option output="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/libglfw3.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_GLFW_USE_CONFIG_H"/>
+					<Add option="-D_XOPEN_SOURCE=600"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/Makefile&quot;  VERBOSE=1 glfw"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glfw/fast">
+				<Option output="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/libglfw3.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_GLFW_USE_CONFIG_H"/>
+					<Add option="-D_XOPEN_SOURCE=600"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/Makefile&quot;  VERBOSE=1 glfw/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/glfw_config.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/src/glad.c">
+			<Option target="glad"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include/GLFW/glfw3.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include/GLFW/glfw3native.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/context.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/egl_context.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/egl_context.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/glx_context.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/glx_context.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/init.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/input.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/internal.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/linux_joystick.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/linux_joystick.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/mappings.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/monitor.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/osmesa_context.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/osmesa_context.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/posix_thread.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/posix_thread.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/posix_time.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/posix_time.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/vulkan.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/window.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/x11_init.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/x11_monitor.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/x11_platform.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/x11_window.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/xkb_unicode.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/xkb_unicode.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/geometry/curve.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/geometry/curvefileio.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math/mat4f.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math/vec3f.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl/openglmatrix.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl/program.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl/shader.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/scene/camera.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/geometry/curve.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/geometry/curvefileio.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/main.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/math/mat4f.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/math/vec3f.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/opengl/openglmatrix.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/opengl/program.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/opengl/shader.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/scene/camera.cpp">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\glfw\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/CMake/modules/FindVulkan.cmake">
+			<Option virtualFolder="CMake Files\external\glfw\CMake\modules\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\glfw\src\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/glfw3.pc.in">
+			<Option virtualFolder="CMake Files\external\glfw\src\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/glfw3Config.cmake.in">
+			<Option virtualFolder="CMake Files\external\glfw\src\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/src/glfw_config.h.in">
+			<Option virtualFolder="CMake Files\external\glfw\src\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/resources/curves/curve.obj">
+			<Option virtualFolder="CMake Files\resources\curves\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/resources/curves/curve.txt">
+			<Option virtualFolder="CMake Files\resources\curves\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/resources/shaders/basic_fs.glsl">
+			<Option virtualFolder="CMake Files\resources\shaders\"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/resources/shaders/basic_vs.glsl">
+			<Option virtualFolder="CMake Files\resources\shaders\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

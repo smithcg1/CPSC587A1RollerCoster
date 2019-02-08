@@ -1,0 +1,9 @@
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/CMakeFiles/rebuild_cache.dir
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/CMakeFiles/edit_cache.dir
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/CMakeFiles/glad.dir
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/CMakeFiles/curve_surfing.dir
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/CMakeFiles/rebuild_cache.dir
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/CMakeFiles/edit_cache.dir
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/CMakeFiles/rebuild_cache.dir
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/CMakeFiles/glfw.dir
+/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw/src/CMakeFiles/edit_cache.dir
