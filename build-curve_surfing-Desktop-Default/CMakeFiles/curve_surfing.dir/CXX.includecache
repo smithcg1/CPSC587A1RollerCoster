@@ -167,6 +167,8 @@ vector
 -
 chrono
 -
+algorithm
+-
 glad/glad.h
 /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/src/glad/glad.h
 GLFW/glfw3.h

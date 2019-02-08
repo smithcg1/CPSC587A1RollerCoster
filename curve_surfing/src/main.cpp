@@ -31,6 +31,7 @@
 #include <limits>
 #include <vector>
 #include <chrono>
+#include <algorithm>
 
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
@@ -120,7 +121,7 @@ bool resetVel = true;
 int checkpoint2 = 3300;
 
 float grav = 9.81*0.08;
-math::Vec3f gravMat = {0, 0.001, 0};
+math::Vec3f gravMat = {0, -0.001, 0};
 float mass = 1;
 
 float vel = 0.01;
@@ -159,8 +160,7 @@ bool loadCurveGeometryToGPU();
 bool loadCurveGeometryToGPU(math::geometry::Curve curve);
 
 void updateVel(uint32_t curveVertexID);
-void updateBasisVectors(uint32_t curveVertexID);
-math::Vec3f generateBinormal(math::Vec3f lastPoint, math::Vec3f currentPoint, math::Vec3f nextPoint);
+void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::Vec3f nextPoint);
 
 math::geometry::Curve arcLengthParam(math::geometry::Curve curve, float deltaS);
 float length(math::Vec3f);
@@ -254,32 +254,19 @@ void oncePerFrame() {
   static uint32_t curveVertexID = 0;
 
   math::Vec3f lastPosition = g_curve[curveVertexID];
-  math::Vec3f lastTangent = tangent;
 
   //Move cart along track
   curveVertexID += vel/arcLengthS;
   std::cout<<"CurveID: " << curveVertexID <<"/"<<g_curve.pointCount() << std::endl;
 
-  tangent = g_curve[curveVertexID]-lastPosition;
-  tangentN = math::normalized(tangent);
-
-  math::Vec3f perpAccel = tangent - lastTangent;
-
-  normal = perpAccel + gravMat;
-  normalN = math::normalized(normal);
-
-  binormalN = math::normalized(cross(tangentN, normalN));
-  normalN = math::normalized(cross(binormalN, tangentN));
-
-  updateBasisVectors(curveVertexID);
+  updateVel(curveVertexID);
+  updateBasisVectors(lastPosition, g_curve[curveVertexID], g_curve[curveVertexID+vel/arcLengthS]);
 
   //Loop back to start of track
   if (curveVertexID >= g_curve.pointCount())
     curveVertexID = 0;
 
   animate(curveVertexID);
-
-  updateVel(curveVertexID);
 }
 
 
@@ -312,8 +299,21 @@ void updateVel(uint32_t curveVertexID){
 }
 
 
-void updateBasisVectors(uint32_t curveVertexID){
+void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::Vec3f nextPoint){
+    math::Vec3f lastTangent = currentPoint - lastPoint;
+    tangent = nextPoint - currentPoint;
+    tangentN = math::normalized(tangent);
 
+    lastTangent = math::normalized(lastTangent)*vel;
+    tangent = math::normalized(tangent)*vel;
+
+    math::Vec3f perpAccel = tangent - lastTangent;
+
+    normal = perpAccel - gravMat;
+    normalN = math::normalized(normal);
+
+    binormalN = math::normalized(cross(tangentN, normalN));
+    normalN = math::normalized(cross(binormalN, tangentN));
 }
 
 
@@ -442,8 +442,7 @@ math::geometry::Curve arcLengthParam(math::geometry::Curve curve, float deltaS){
     for (int i=0; i<curve.pointCount(); i++){
 
         math::Vec3f directionVec;
-        if(i != curve.pointCount()-1){ directionVec = curve[i+1] - curve[i];}
-        else{                       directionVec = curve[i] - curve[0];}
+        directionVec = curve[(i+1)%curve.pointCount()] - curve[i%curve.pointCount()];
 
         distanceTally += length(directionVec);
 
@@ -553,16 +552,6 @@ void deleteIDs() {
 }
 
 
-math::Vec3f generateBinormal(math::Vec3f lastPoint, math::Vec3f currentPoint, math::Vec3f nextPoint){
-    math::Vec3f lastTangent = currentPoint - lastPoint;
-    math::Vec3f currentTangent = nextPoint - currentPoint;
-    math::Vec3f currentNormal = currentTangent-lastTangent + gravMat;
-
-    return(math::normalized(cross(currentTangent, currentNormal)));
-}
-
-
-
 bool init() {
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
@@ -583,16 +572,23 @@ bool init() {
     return false;
   }
 
+  int max = g_curve.pointCount();
+  math::Vec3f lastPoint = g_curve.m_points[max-1];
+  math::Vec3f currentPoint;
+  math::Vec3f nextPoint;
   for(int i = 0; i < g_curve.pointCount(); i++){
-        int max = g_curve.pointCount();
-        math::Vec3f lastPoint = g_curve.m_points[(i-1)%max];
-        math::Vec3f currentPoint = g_curve.m_points[(i)%max];
-        math::Vec3f nextPoint = g_curve.m_points[(i+1)%max];
+        currentPoint = g_curve.m_points[(i)%max];
+        nextPoint = g_curve.m_points[(i+1)%max];
 
-        //math::Vec3f currentBinormal = generateBinormal(lastPoint, currentPoint, nextPoint);
+        updateVel(i);
+        updateBasisVectors(lastPoint, currentPoint, nextPoint);
 
-        g_curveLT.m_points.push_back(g_curve.m_points[i]);
-        g_curveRT.m_points.push_back(g_curve.m_points[i]);
+        //std::cout << "Binormal of track: " << binormalN[0] << " " << binormalN[1] << " " << binormalN[2] << std::endl;
+
+        g_curveLT.m_points.push_back(g_curve.m_points[i] - normalN*carH*0.1 + binormalN*carW*0.1);
+        g_curveRT.m_points.push_back(g_curve.m_points[i] - normalN*carH*0.1 - binormalN*carW*0.1);
+
+        lastPoint = currentPoint;
   }
 
   resetCamera();
