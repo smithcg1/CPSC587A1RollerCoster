@@ -94,6 +94,9 @@
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/scene"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/SDL2-2.0.9"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/SDL2_mixer-2.0.4"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/SDL2-2.0.9/include"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"/>
@@ -124,6 +127,9 @@
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/scene"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/SDL2-2.0.9"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/SDL2_mixer-2.0.4"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/SDL2-2.0.9/include"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"/>

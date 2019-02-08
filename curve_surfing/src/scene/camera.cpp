@@ -52,7 +52,7 @@ void Camera::moveBackward(float distance) {
 }
 
 void Camera::rotateUp(float angleDegrees) {
-  Vec3f right = localRight();
+  Vec3f right = Vec3f{1.0f, 0.0f, 0.0f}; //localRight();
   m_forward = rotateAroundNormalizedAxis(m_forward, right, angleDegrees);
 
   m_forward.normalize();

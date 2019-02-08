@@ -33,6 +33,15 @@
 #include <chrono>
 #include <algorithm>
 
+//http://hzqtc.github.io/2012/05/play-mp3-with-libmpg123-and-libao.html
+//#include "libao-1.2.0/include/ao/ao.h"
+
+
+#include <SDL.h>
+#include <SDL_mixer.h>
+#define WAV_PATH "Scream4.wav"
+Mix_Chunk *wave = NULL;
+
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
@@ -609,6 +618,30 @@ int main(int argc, char **argv) {
   if (!glfwInit()) {
     exit(EXIT_FAILURE);
   }
+/*
+  if (SDL_Init(SDL_INIT_AUDIO) < 0)
+      return -1;
+
+
+  // Initialize SDL.
+      if (SDL_Init(SDL_INIT_AUDIO) < 0)
+          return -1;
+
+      //Initialize SDL_mixer
+      if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
+          return -1;
+
+      // Load our sound effect
+      wave = Mix_LoadWAV(WAV_PATH);
+      if (wave == NULL)
+  return -1;
+
+*/
+
+
+
+
+
 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -675,6 +708,9 @@ int main(int argc, char **argv) {
   return EXIT_SUCCESS;
 }
 
+
+
+
 //==================== CALLBACK FUNCTIONS ====================//
 
 void windowSetSizeFunc(GLFWwindow *window, int width, int height) {
@@ -726,12 +762,13 @@ void windowKeyFunc(GLFWwindow *window, int key, int scancode, int action,
     glfwSetWindowShouldClose(window, GL_TRUE);
     break;
 
-  //case GLFW_KEY_1:
+  case GLFW_KEY_1:
   //    Camera.m_pos = math::Vec3f{0.0f, 0.0f, 0.0f};
-  //  break;
+    break;
 
-
-
+  case GLFW_KEY_2:
+    std::cout<< "test" << std::endl;
+    break;
 
   case GLFW_KEY_W:
     g_cameraUpdate.set(CameraUpdate::moveForward, set);
