@@ -90,6 +90,8 @@ std::string g_curveFilePath = "./curves/RollerCosterTrack.obj";
 math::geometry::Curve g_curve;
 math::geometry::Curve g_curveLT;
 math::geometry::Curve g_curveRT;
+math::geometry::Curve g_curvePlanks;
+math::geometry::Curve g_pillar;
 int32_t g_numberOfSubdivisions = 0;
 
 // Only one camera, so only one veiw and perspective matrix are needed.
@@ -128,8 +130,8 @@ float arcLengthS = 0.01;
 bool resetVel = true;
 
 
-float grav = 9.81*0.08;
-math::Vec3f gravMat = {0, -0.001, 0};
+float grav = 9.81*0.00005;
+math::Vec3f gravMat = {0, -grav, 0};
 float mass = 1;
 
 float vel = 0.01;
@@ -240,6 +242,11 @@ void displayFunc() {
   loadCurveGeometryToGPU(g_curveRT);
   glDrawArrays(GL_LINE_LOOP, 0, g_curveData.verticesCount);
 
+  loadCurveGeometryToGPU(g_curvePlanks);
+  glDrawArrays(GL_TRIANGLES, 0, g_curveData.verticesCount);
+
+  loadCurveGeometryToGPU(g_pillar);
+  glDrawArrays(GL_TRIANGLES, 0, g_curveData.verticesCount);
 
 }
 
@@ -489,7 +496,7 @@ bool loadCurveGeometryToGPU(math::geometry::Curve curve) {
 math::geometry::Curve arcLengthParam(math::geometry::Curve curve, float deltaS){
     std::cout<<"Starting with " << curve.pointCount() << " points"<<std::endl;
 
-    int deltaTSubdivCount = 13;
+    int deltaTSubdivCount = 14;
     math::geometry::Points temp;
     curve = math::geometry::cubicSubdivideCurve(curve, deltaTSubdivCount);
 
@@ -642,8 +649,44 @@ bool init() {
 
         //std::cout << "Binormal of track: " << binormalN[0] << " " << binormalN[1] << " " << binormalN[2] << std::endl;
 
-        g_curveLT.m_points.push_back(g_curve.m_points[i] - normalN*carH*0.1 + binormalN*carW*0.1);
-        g_curveRT.m_points.push_back(g_curve.m_points[i] - normalN*carH*0.1 - binormalN*carW*0.1);
+        math::Vec3f leftTrackPoint = g_curve.m_points[i] - normalN*carH*0.1 + binormalN*carW*0.1;
+        math::Vec3f rightTrackPoint = g_curve.m_points[i] - normalN*carH*0.1 - binormalN*carW*0.1;
+
+        math::Vec3f leftFutureTrackPoint = g_curve.m_points[i+2] - normalN*carH*0.1 + binormalN*carW*0.1;
+        math::Vec3f rightFutureTrackPoint = g_curve.m_points[i+2] - normalN*carH*0.1 - binormalN*carW*0.1;
+
+        g_curveLT.m_points.push_back(leftTrackPoint);
+        g_curveRT.m_points.push_back(rightTrackPoint);
+
+        if(i%8 == 0){
+            g_curvePlanks.m_points.push_back(leftTrackPoint);
+            g_curvePlanks.m_points.push_back(rightTrackPoint);
+            g_curvePlanks.m_points.push_back(leftFutureTrackPoint);
+
+            g_curvePlanks.m_points.push_back(leftFutureTrackPoint);
+            g_curvePlanks.m_points.push_back(rightFutureTrackPoint);
+            g_curvePlanks.m_points.push_back(rightTrackPoint);
+        }
+
+        if(i%32 == 0){
+            //Left pillar
+            g_pillar.m_points.push_back(leftTrackPoint);
+            g_pillar.m_points.push_back(math::Vec3f(leftTrackPoint[0], 0.0f, leftTrackPoint[2]));
+            g_pillar.m_points.push_back(math::Vec3f(leftFutureTrackPoint[0], 0.0f, leftFutureTrackPoint[2]));
+
+            g_pillar.m_points.push_back(math::Vec3f(leftFutureTrackPoint[0], 0.0f, leftFutureTrackPoint[2]));
+            g_pillar.m_points.push_back(leftFutureTrackPoint);
+            g_pillar.m_points.push_back(leftTrackPoint);
+
+            //Right pillar
+            g_pillar.m_points.push_back(rightTrackPoint);
+            g_pillar.m_points.push_back(math::Vec3f(rightTrackPoint[0], 0.0f, rightTrackPoint[2]));
+            g_pillar.m_points.push_back(math::Vec3f(rightFutureTrackPoint[0], 0.0f, rightFutureTrackPoint[2]));
+
+            g_pillar.m_points.push_back(math::Vec3f(rightFutureTrackPoint[0], 0.0f, rightFutureTrackPoint[2]));
+            g_pillar.m_points.push_back(rightFutureTrackPoint);
+            g_pillar.m_points.push_back(rightTrackPoint);
+        }
 
         lastPoint = currentPoint;
   }
