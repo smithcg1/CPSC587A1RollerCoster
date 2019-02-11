@@ -16,6 +16,27 @@ CMakeFiles/curve_surfing.dir/src/main.cpp.o
  /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include/GLFW/glfw3.h
  /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/geometry/curve.h
  /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/geometry/curvefileio.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ESoundEngineOptions.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ESoundOutputDrivers.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_EStreamModes.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_IAudioRecorder.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_IAudioStream.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_IAudioStreamLoader.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_IFileFactory.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_IFileReader.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_IRefCounted.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ISound.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ISoundDeviceList.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ISoundEffectControl.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ISoundEngine.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ISoundMixedOutputReceiver.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ISoundSource.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_ISoundStopEventReceiver.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_IVirtualRefCounted.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_SAudioStreamFormat.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_irrKlangTypes.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/ik_vec3d.h
+ /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include/irrKlang.h
  /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math/mat4f.h
  /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math/vec3f.h
  /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl/openglmatrix.h

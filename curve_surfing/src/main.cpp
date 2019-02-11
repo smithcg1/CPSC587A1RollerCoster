@@ -33,6 +33,8 @@
 #include <chrono>
 #include <algorithm>
 
+#include <irrKlang.h>
+#pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
@@ -45,6 +47,7 @@
 #include "program.h"
 #include "vec3f.h"
 
+//http://irrlicht.sourceforge.net/forum/viewtopic.php?p=145834
 
 //==================== GLOBAL VARIABLES ====================//
 /*	Put here for simplicity. Feel free to restructure into
@@ -198,6 +201,9 @@ void resetCamera();
 std::string GL_ERROR();
 int main(int, char **);
 
+
+
+using namespace irrklang;
 //==================== FUNCTION DEFINITIONS ====================//
 
 void displayFunc() {
@@ -702,10 +708,15 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
+/*
+  // start the sound engine with default parameters
+  ISoundEngine* engine = createIrrKlangDevice();
 
+  if (!engine)
+     return 0; // error starting up the engine
 
-
-
+  engin->play2D("Scream1.mp3", true);
+*/
 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);

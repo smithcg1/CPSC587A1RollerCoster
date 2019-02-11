@@ -94,6 +94,8 @@
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/scene"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/bin/linux-gcc-64"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"/>
@@ -124,6 +126,8 @@
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/scene"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include"/>
+					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/bin/linux-gcc-64"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"/>
 					<Add directory="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"/>
@@ -288,6 +292,9 @@
 			<Option target="curve_surfing"/>
 		</Unit>
 		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/geometry/curvefileio.h">
+			<Option target="curve_surfing"/>
+		</Unit>
+		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include">
 			<Option target="curve_surfing"/>
 		</Unit>
 		<Unit filename="/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/math/mat4f.h">

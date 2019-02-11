@@ -45,6 +45,7 @@ set(SOURCES
     src/opengl/shader.cpp
     src/opengl/openglmatrix.cpp
     src/scene/camera.cpp
+    include/irrKlang-64bit-1.6.0/include
     )
 
 #[ Resource ]
@@ -93,6 +94,8 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE glad
     PRIVATE ${GLAD_LIBRARIES}
     PRIVATE ${CMAKE_DL_LIBS}
+    #PRIVATE include/irrKlang-64bit-1.6.0/lib/Winx64-visualStudio
+    #PRIVATE -lIrrKlang
     )
 
 target_include_directories(${PROJECT_NAME}
@@ -101,6 +104,9 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE include/math
     PRIVATE include/opengl
     PRIVATE include/scene
+    PRIVATE include/irrKlang-64bit-1.6.0/include
+    #PRIVATE include/irrKlang-64bit-1.6.0/bin/winx64-visualStudio
+    PRIVATE include/irrKlang-64bit-1.6.0/bin/linux-gcc-64
     PRIVATE external
     PRIVATE ${GLFW_DIR}/include
     PRIVATE ${GLAD_DIR}/include
