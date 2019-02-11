@@ -63,7 +63,7 @@ void Camera::rotateUp(float angleDegrees) {
 void Camera::rotateDown(float angleDegrees) { rotateUp(-angleDegrees); }
 
 void Camera::rotateLeft(float angleDegrees) {
-  m_forward = rotateAroundNormalizedAxis(m_forward, m_up, angleDegrees);
+  m_forward = rotateAroundNormalizedAxis(m_forward, Vec3f{0.0f, 1.0f, 0.0f}, angleDegrees);
   m_forward.normalize();
 }
 

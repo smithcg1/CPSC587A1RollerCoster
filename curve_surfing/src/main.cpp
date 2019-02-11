@@ -125,9 +125,8 @@ unsigned int currentTime = lastTime;
 float fps = 60;
 
 float arcLengthS = 0.01;
-int checkpoint1 = 790;
 bool resetVel = true;
-int checkpoint2 = 3300;
+
 
 float grav = 9.81*0.08;
 math::Vec3f gravMat = {0, -0.001, 0};
@@ -151,9 +150,13 @@ math::Vec3f normalN = math::Vec3f{0,1,0};
 math::Vec3f tangentN = math::Vec3f{0,0,1};
 
 math::Vec3f lastPosition;
+math::Vec3f currentPosition;
 math::Vec3f lastTangent;
 
 float constantVel = 1/fps;
+
+int cameraMode = 0;         //1 is free,    2 is cinamatic,    3 is passenger
+int cartCheckpoint = 1;
 
 //==================== FUNCTION DECLARATIONS ====================//
 void displayFunc();
@@ -168,6 +171,8 @@ bool loadMeshGeometryToGPU();
 bool loadCurveGeometryToGPU();
 bool loadCurveGeometryToGPU(math::geometry::Curve curve);
 
+void updateCheckpoint(int curveVertexID);
+void updateCamera();
 void updateVel(uint32_t curveVertexID);
 void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::Vec3f nextPoint);
 
@@ -262,10 +267,11 @@ math::Mat4f TRMatrix(math::Vec3f const &binormal, math::Vec3f const &normal, mat
 void oncePerFrame() {
   static uint32_t curveVertexID = 0;
 
-  math::Vec3f lastPosition = g_curve[curveVertexID];
+  lastPosition = g_curve[curveVertexID];
 
   //Move cart along track
   curveVertexID += vel/arcLengthS;
+  currentPosition = g_curve[curveVertexID];
   std::cout<<"CurveID: " << curveVertexID <<"/"<<g_curve.pointCount() << std::endl;
 
   updateVel(curveVertexID);
@@ -275,20 +281,62 @@ void oncePerFrame() {
   if (curveVertexID >= g_curve.pointCount())
     curveVertexID = 0;
 
+  updateCheckpoint(curveVertexID);
+  updateCamera();
+
   animate(curveVertexID);
+}
+
+
+void updateCheckpoint(int curveVertexID){
+    if(curveVertexID <= 790){
+        cartCheckpoint = 1;
+    }
+    else if(curveVertexID <= 3300){
+        cartCheckpoint = 2;
+    }
+    else{
+        cartCheckpoint = 3;
+    }
+}
+
+void updateCamera(){
+    if(cameraMode == 1)
+    {
+        g_camera.m_pos = math::Vec3f{0.0, 2.0f, 7.0f};
+        g_camera.m_forward = math::Vec3f{0.0, 0.0f, -1.0f};
+        g_camera.m_up = math::Vec3f{0.0, 1.0f, 0.0f};;
+        reloadViewMatrix();
+    }
+
+    if(cameraMode == 2)
+    {
+        g_camera.m_pos = math::Vec3f{0.0, 0.0f, 0.0f};
+        g_camera.m_forward = math::normalized(currentPosition - g_camera.m_pos);
+        g_camera.m_up = math::Vec3f{0.0, 1.0f, 0.0f};
+    }
+
+    else if(cameraMode == 3)
+    {
+        g_camera.m_pos = currentPosition + normalN*0.05;
+        g_camera.m_forward = tangentN;
+        g_camera.m_up = normalN;
+      }
+
+    reloadViewMatrix();
 }
 
 
 void updateVel(uint32_t curveVertexID){
     //Initial climb
-    if(curveVertexID <= checkpoint1){
+    if(cartCheckpoint == 1){
         if (vel <= constantVel)
           vel = vel*1.005;
         resetVel = true;
     }
 
     //Physics simulation
-    else if (curveVertexID <= checkpoint2){
+    else if (cartCheckpoint == 2){
         if(resetVel){
             vel = 0.01;
             resetVel = false;
@@ -763,11 +811,18 @@ void windowKeyFunc(GLFWwindow *window, int key, int scancode, int action,
     break;
 
   case GLFW_KEY_1:
-  //    Camera.m_pos = math::Vec3f{0.0f, 0.0f, 0.0f};
+    cameraMode = 1;
+    updateCamera();
     break;
 
   case GLFW_KEY_2:
-    std::cout<< "test" << std::endl;
+    cameraMode = 2;
+    updateCamera();
+    break;
+
+  case GLFW_KEY_3:
+    cameraMode = 3;
+    updateCamera();
     break;
 
   case GLFW_KEY_W:
