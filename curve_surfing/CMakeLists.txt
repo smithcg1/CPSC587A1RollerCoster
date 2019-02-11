@@ -101,9 +101,6 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE include/math
     PRIVATE include/opengl
     PRIVATE include/scene
-    PRIVATE include/SDL2-2.0.9
-    PRIVATE include/SDL2_mixer-2.0.4
-    PRIVATE include/SDL2-2.0.9/include
     PRIVATE external
     PRIVATE ${GLFW_DIR}/include
     PRIVATE ${GLAD_DIR}/include
