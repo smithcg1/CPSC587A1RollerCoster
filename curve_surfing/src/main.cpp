@@ -78,11 +78,10 @@ struct RenderableLine {
 } // namespace openGL
 
 openGL::RenderableMesh g_meshData;
+openGL::RenderableMesh g_meshData2;
 openGL::RenderableLine g_curveData;
 
 // Curve geometry for simulation
-std::string g_curveFilePath = "./curves/RollerCosterTrack.obj";
-//std::string g_curveFilePath = "./curves/RollerCosterTrackv2DemonHorn.obj";
 math::geometry::Curve g_curve;
 math::geometry::Curve g_curveLT;
 math::geometry::Curve g_curveRT;
@@ -116,7 +115,7 @@ float WIN_FOV = 50.f;
 float WIN_NEAR = 0.01f;
 float WIN_FAR = 100.f;
 
-float scale = 0.001;
+
 //unsigned int now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 unsigned int lastTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 unsigned int currentTime = lastTime;
@@ -125,8 +124,12 @@ float fps = 60;
 float arcLengthS = 0.01;
 bool resetVel = true;
 
+float scale = 1;
+float rollerCosterH = 35;
+float grav = (9.81)/(fps*fps);
+//std::string g_curveFilePath = "./curves/RollerCosterTrack.obj";
+std::string g_curveFilePath = "./curves/RollerCosterTrackv2DemonHorn.obj";
 
-float grav = 9.81*0.00005;
 math::Vec3f gravMat = {0, -grav, 0};
 float mass = 1;
 
@@ -151,7 +154,7 @@ math::Vec3f lastPosition;
 math::Vec3f currentPosition;
 math::Vec3f lastTangent;
 
-float constantVel = 1/fps;
+float constantVel = 5/fps;
 
 int cameraMode = 0;         //1 is free,    2 is cinamatic,    3 is passenger
 int cartCheckpoint = 1;
@@ -173,6 +176,8 @@ void updateCheckpoint(int curveVertexID);
 void updateCamera();
 void updateVel(uint32_t curveVertexID);
 void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::Vec3f nextPoint);
+std::vector<math::Vec3f> createCart(std::vector<math::Vec3f> *verts);
+
 
 math::geometry::Curve arcLengthParam(math::geometry::Curve curve, float deltaS);
 float length(math::Vec3f);
@@ -227,6 +232,23 @@ void displayFunc() {
   glDrawElements(GL_TRIANGLE_STRIP, g_meshData.indicesCount, GL_UNSIGNED_INT,
                  (void *)0);
 
+
+  /*
+  g_MVP = g_P * g_V * g_meshData.modelMatrix;
+  program.setUniformMat4f("MVP", g_MVP,
+                          true); // true, transpose for stupid OpenGL
+
+  // Use VAO that holds buffer bindings
+  // and attribute config of buffers
+  glBindVertexArray(g_meshData.vaoID);
+  // Draw mesh, start at vertex 0, draw a # of them
+  glDrawElements(GL_TRIANGLE_STRIP, g_meshData.indicesCount, GL_UNSIGNED_INT,
+                 (void *)0);
+  */
+
+
+
+
   // ==== DRAW CURVE ===== //
   g_MVP = g_P * g_V * g_curveData.modelMatrix;
   program.setUniformMat4f("MVP", g_MVP,
@@ -254,7 +276,7 @@ void animate(int vertexID) {
   using namespace openGL;
   math::Vec3f pos = g_curve[vertexID];
 
-  g_meshData.modelMatrix = TRMatrix( tangentN,  normalN, binormalN,pos) * UniformScaleMatrix(0.1f);
+  g_meshData.modelMatrix = TRMatrix( tangentN,  normalN, binormalN,pos) * UniformScaleMatrix(scale);
 }
 
 //Binormal, normal, tangent, position
@@ -283,7 +305,8 @@ void oncePerFrame() {
 
   updateVel(curveVertexID);
   int nextPoint = ((int)(curveVertexID+vel/arcLengthS))%g_curve.pointCount();
-  updateBasisVectors(lastPosition, g_curve[curveVertexID], g_curve[nextPoint]);
+  //updateBasisVectors(lastPosition, g_curve[curveVertexID], g_curve[nextPoint]);
+  updateBasisVectors(g_curve[(curveVertexID-1)%g_curve.pointCount()], g_curve[curveVertexID], g_curve[(curveVertexID+1)%g_curve.pointCount()]);
 
   //Loop back to start of track
   if (curveVertexID >= g_curve.pointCount())
@@ -295,20 +318,6 @@ void oncePerFrame() {
   animate(curveVertexID);
 }
 
-
-void updateCheckpoint(int curveVertexID){
-    if(curveVertexID <= 790){
-        cartCheckpoint = 1;
-    }
-    else if(curveVertexID <= 3600){
-        if(cartCheckpoint == 1)
-            engine->play2D("external/Scream4.wav", false);
-        cartCheckpoint = 2;
-    }
-    else{
-        cartCheckpoint = 3;
-    }
-}
 
 void updateCamera(){
     if(cameraMode == 1)
@@ -325,7 +334,7 @@ void updateCamera(){
 
     else if(cameraMode == 3)
     {
-        g_camera.m_pos = currentPosition + normalN*0.05;
+        g_camera.m_pos = currentPosition + normalN*0.5*scale;
         g_camera.m_forward = tangentN;
         g_camera.m_up = normalN;
       }
@@ -333,6 +342,25 @@ void updateCamera(){
     reloadViewMatrix();
 }
 
+
+void updateCheckpoint(int curveVertexID){
+    if(curveVertexID <= 8600){
+        //std::cout<<"Locked Speed"<< std::endl;
+        cartCheckpoint = 1;
+    }
+
+    else if(curveVertexID <= 26300){
+        //std::cout<<"Free Speed"<< std::endl;
+        if(cartCheckpoint == 1)
+            engine->play2D("external/Scream4.wav", false);
+        cartCheckpoint = 2;
+    }
+    else{
+        //std::cout<<"Locked Speed"<< std::endl;
+        cartCheckpoint = 3;
+    }
+    std::cout<< "Curve ID of: " << curveVertexID << "  is in section: " << cartCheckpoint << std::endl;
+}
 
 void updateVel(uint32_t curveVertexID){
     //Initial climb
@@ -348,16 +376,14 @@ void updateVel(uint32_t curveVertexID){
             vel = constantVel;
             resetVel = false;
         }
-        if(tangent[1] <=0 ){
-            vel += (sqrt(2*grav*(-tangent[1]))/fps);}
-        else
-            vel -= (sqrt(2*grav*tangent[1])/fps);
+        //std::cout<<"Because of grav: " << grav << "  and deltaH: " << -tangent[1] << std::endl;
+        vel = (sqrt(2*grav*(rollerCosterH-g_curve[curveVertexID][1])));
     }
 
     //Ending slowdown
     else{
         if (vel > constantVel)
-            vel = vel*0.95;
+            vel = vel*0.70;
     }
     std::cout<<"Current speed: " << vel << std::endl;
 }
@@ -371,6 +397,9 @@ void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::V
     lastTangent = math::normalized(lastTangent)*vel;
     tangent = math::normalized(tangent)*vel;
 
+    std::cout << "Last point: [" << lastPoint[0] << "," << lastPoint[1] << "," << lastPoint[2] << "]" << std::endl;
+    std::cout << "This point: [" << currentPoint[0] << "," << currentPoint[1] << "," << currentPoint[2] << "]" << std::endl;
+
     math::Vec3f perpAccel = tangent - lastTangent;
 
     normal = perpAccel - gravMat;
@@ -378,42 +407,16 @@ void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::V
 
     binormalN = math::normalized(cross(tangentN, normalN));
     normalN = math::normalized(cross(binormalN, tangentN));
-}
 
+    std::cout << "Normalized tangent vector: [" << tangentN[0] << "," << tangentN[1] << "," << tangentN[2] << "]" << std::endl;
+    std::cout << "Normalized normal vector: [" << normalN[0] << "," << normalN[1] << "," << normalN[2] << "]" << std::endl;
+}
 
 
 bool loadMeshGeometryToGPU() {
   std::vector<math::Vec3f> verts;
+  createCart(&verts);
 
-  //Left Side
-  verts.push_back({-carL, -carH, carW});
-  verts.push_back({-carL, carH, carW});
-  verts.push_back({carL, -carH, carW});
-  verts.push_back({carL, carH, carW});
-
-  //Back
-  verts.push_back({carL, -carH, -carW});
-  verts.push_back({carL, carH, -carW});
-
-  //Top
-  verts.push_back({carL, carH, carW});
-  verts.push_back({-carL, carH, -carW});
-  verts.push_back({-carL, carH, carW});
-
-  //Front
-  verts.push_back({-carL, -carH, carW});
-  verts.push_back({-carL, carH, -carW});
-  verts.push_back({-carL, -carH, -carW});
-
-  //Bottom
-  verts.push_back({-carL, -carH, carW});
-  verts.push_back({carL, -carH, carW});
-  verts.push_back({carL, -carH, -carW});
-
-  //Right side
-  verts.push_back({-carL, -carH, -carW});
-  verts.push_back({carL, carH, -carW});
-  verts.push_back({-carL, carH, -carW});
 
   g_meshData.verticesCount = verts.size();
 
@@ -435,6 +438,40 @@ bool loadMeshGeometryToGPU() {
 
   return true;
 }
+
+
+std::vector<math::Vec3f> createCart(std::vector<math::Vec3f> *verts){
+    //Left Side
+    verts->push_back({-carL, -carH, carW});
+    verts->push_back({-carL, carH, carW});
+    verts->push_back({carL, -carH, carW});
+    verts->push_back({carL, carH, carW});
+
+    //Back
+    verts->push_back({carL, -carH, -carW});
+    verts->push_back({carL, carH, -carW});
+
+    //Top
+    verts->push_back({carL, carH, carW});
+    verts->push_back({-carL, carH, -carW});
+    verts->push_back({-carL, carH, carW});
+
+    //Front
+    verts->push_back({-carL, -carH, carW});
+    verts->push_back({-carL, carH, -carW});
+    verts->push_back({-carL, -carH, -carW});
+
+    //Bottom
+    verts->push_back({-carL, -carH, carW});
+    verts->push_back({carL, -carH, carW});
+    verts->push_back({carL, -carH, -carW});
+
+    //Right side
+    verts->push_back({-carL, -carH, -carW});
+    verts->push_back({carL, carH, -carW});
+    verts->push_back({-carL, carH, -carW});
+}
+
 
 bool loadCurveGeometryToGPU(int numberOfSubdivisions) {
   using namespace math::geometry;
@@ -644,21 +681,22 @@ bool init() {
         currentPoint = g_curve.m_points[(i)%max];
         nextPoint = g_curve.m_points[(i+1)%max];
 
+        updateCheckpoint(i);
         updateVel(i);
         updateBasisVectors(lastPoint, currentPoint, nextPoint);
 
         //std::cout << "Binormal of track: " << binormalN[0] << " " << binormalN[1] << " " << binormalN[2] << std::endl;
 
-        math::Vec3f leftTrackPoint = g_curve.m_points[i] - normalN*carH*0.1 + binormalN*carW*0.1;
-        math::Vec3f rightTrackPoint = g_curve.m_points[i] - normalN*carH*0.1 - binormalN*carW*0.1;
+        math::Vec3f leftTrackPoint = g_curve.m_points[i] - normalN*carH*scale + binormalN*carW*scale;
+        math::Vec3f rightTrackPoint = g_curve.m_points[i] - normalN*carH*scale - binormalN*carW*scale;
 
-        math::Vec3f leftFutureTrackPoint = g_curve.m_points[i+2] - normalN*carH*0.1 + binormalN*carW*0.1;
-        math::Vec3f rightFutureTrackPoint = g_curve.m_points[i+2] - normalN*carH*0.1 - binormalN*carW*0.1;
+        math::Vec3f leftFutureTrackPoint = g_curve.m_points[i+15] - normalN*carH*scale + binormalN*carW*scale;
+        math::Vec3f rightFutureTrackPoint = g_curve.m_points[i+15] - normalN*carH*scale - binormalN*carW*scale;
 
         g_curveLT.m_points.push_back(leftTrackPoint);
         g_curveRT.m_points.push_back(rightTrackPoint);
 
-        if(i%8 == 0){
+        if(i%64 == 0){
             g_curvePlanks.m_points.push_back(leftTrackPoint);
             g_curvePlanks.m_points.push_back(rightTrackPoint);
             g_curvePlanks.m_points.push_back(leftFutureTrackPoint);
@@ -668,7 +706,7 @@ bool init() {
             g_curvePlanks.m_points.push_back(rightTrackPoint);
         }
 
-        if(i%32 == 0){
+        if(i%256 == 0){
             //Left pillar
             g_pillar.m_points.push_back(leftTrackPoint);
             g_pillar.m_points.push_back(math::Vec3f(leftTrackPoint[0], 0.0f, leftTrackPoint[2]));
@@ -762,7 +800,7 @@ int main(int argc, char **argv) {
 
       if (g_play) {
           currentTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-          if(currentTime >= lastTime+((1/fps)*1000))
+          if(currentTime >= lastTime+((1/fps)*1000))    //FPS lock
             oncePerFrame();
       }
 
