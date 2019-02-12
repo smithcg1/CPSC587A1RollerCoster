@@ -82,6 +82,7 @@ openGL::RenderableLine g_curveData;
 
 // Curve geometry for simulation
 std::string g_curveFilePath = "./curves/RollerCosterTrack.obj";
+//std::string g_curveFilePath = "./curves/RollerCosterTrackv2DemonHorn.obj";
 math::geometry::Curve g_curve;
 math::geometry::Curve g_curveLT;
 math::geometry::Curve g_curveRT;
@@ -300,6 +301,8 @@ void updateCheckpoint(int curveVertexID){
         cartCheckpoint = 1;
     }
     else if(curveVertexID <= 3600){
+        if(cartCheckpoint == 1)
+            engine->play2D("external/Scream4.wav", false);
         cartCheckpoint = 2;
     }
     else{
@@ -855,7 +858,7 @@ void windowKeyFunc(GLFWwindow *window, int key, int scancode, int action,
 
   case GLFW_KEY_4:
       std::cout << "Play Sound" << std::endl;
-      engine->play2D("Scream1.mp3", true);
+      engine->play2D("external/Scream4.wav", true);
     break;
 
   case GLFW_KEY_W:
