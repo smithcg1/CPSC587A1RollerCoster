@@ -232,6 +232,9 @@ GLFW_USE_WAYLAND:BOOL=OFF
 //Use the Vulkan loader statically linked into application
 GLFW_VULKAN_STATIC:BOOL=OFF
 
+//Path to a library.
+IRRKLANG_LIBRARY:FILEPATH=/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/bin/linux-gcc-64/libIrrKlang.so
+
 //Takes an empty string or 64. Directory where lib will be installed:
 // lib or lib64
 LIB_SUFFIX:STRING=

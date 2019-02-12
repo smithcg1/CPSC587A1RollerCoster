@@ -202,6 +202,7 @@ curve_surfing: CMakeFiles/curve_surfing.dir/build.make
 curve_surfing: /usr/lib64/libGL.so
 curve_surfing: external/glfw/src/libglfw3.a
 curve_surfing: libglad.a
+curve_surfing: /home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/bin/linux-gcc-64/libIrrKlang.so
 curve_surfing: /usr/lib64/librt.so
 curve_surfing: /usr/lib64/libm.so
 curve_surfing: /usr/lib64/libX11.so

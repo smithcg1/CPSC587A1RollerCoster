@@ -204,6 +204,7 @@ int main(int, char **);
 
 
 using namespace irrklang;
+ISoundEngine *engine;
 //==================== FUNCTION DEFINITIONS ====================//
 
 void displayFunc() {
@@ -280,7 +281,8 @@ void oncePerFrame() {
   std::cout<<"CurveID: " << curveVertexID <<"/"<<g_curve.pointCount() << std::endl;
 
   updateVel(curveVertexID);
-  updateBasisVectors(lastPosition, g_curve[curveVertexID], g_curve[curveVertexID+vel/arcLengthS]);
+  int nextPoint = ((int)(curveVertexID+vel/arcLengthS))%g_curve.pointCount();
+  updateBasisVectors(lastPosition, g_curve[curveVertexID], g_curve[nextPoint]);
 
   //Loop back to start of track
   if (curveVertexID >= g_curve.pointCount())
@@ -297,7 +299,7 @@ void updateCheckpoint(int curveVertexID){
     if(curveVertexID <= 790){
         cartCheckpoint = 1;
     }
-    else if(curveVertexID <= 3300){
+    else if(curveVertexID <= 3600){
         cartCheckpoint = 2;
     }
     else{
@@ -308,10 +310,7 @@ void updateCheckpoint(int curveVertexID){
 void updateCamera(){
     if(cameraMode == 1)
     {
-        g_camera.m_pos = math::Vec3f{0.0, 2.0f, 7.0f};
-        g_camera.m_forward = math::Vec3f{0.0, 0.0f, -1.0f};
-        g_camera.m_up = math::Vec3f{0.0, 1.0f, 0.0f};;
-        reloadViewMatrix();
+        //Allow free-cam
     }
 
     if(cameraMode == 2)
@@ -335,7 +334,7 @@ void updateCamera(){
 void updateVel(uint32_t curveVertexID){
     //Initial climb
     if(cartCheckpoint == 1){
-        if (vel <= constantVel)
+        if (vel < constantVel)
           vel = vel*1.005;
         resetVel = true;
     }
@@ -343,7 +342,7 @@ void updateVel(uint32_t curveVertexID){
     //Physics simulation
     else if (cartCheckpoint == 2){
         if(resetVel){
-            vel = 0.01;
+            vel = constantVel;
             resetVel = false;
         }
         if(tangent[1] <=0 ){
@@ -354,7 +353,7 @@ void updateVel(uint32_t curveVertexID){
 
     //Ending slowdown
     else{
-        if (vel >= constantVel)
+        if (vel > constantVel)
             vel = vel*0.95;
     }
     std::cout<<"Current speed: " << vel << std::endl;
@@ -708,15 +707,13 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-/*
+
   // start the sound engine with default parameters
-  ISoundEngine* engine = createIrrKlangDevice();
+  engine = createIrrKlangDevice();
 
   if (!engine)
      return 0; // error starting up the engine
 
-  engin->play2D("Scream1.mp3", true);
-*/
 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -839,6 +836,10 @@ void windowKeyFunc(GLFWwindow *window, int key, int scancode, int action,
 
   case GLFW_KEY_1:
     cameraMode = 1;
+    g_camera.m_pos = math::Vec3f{0.0, 2.0f, 7.0f};
+    g_camera.m_forward = math::Vec3f{0.0, 0.0f, -1.0f};
+    g_camera.m_up = math::Vec3f{0.0, 1.0f, 0.0f};;
+    reloadViewMatrix();
     updateCamera();
     break;
 
@@ -850,6 +851,11 @@ void windowKeyFunc(GLFWwindow *window, int key, int scancode, int action,
   case GLFW_KEY_3:
     cameraMode = 3;
     updateCamera();
+    break;
+
+  case GLFW_KEY_4:
+      std::cout << "Play Sound" << std::endl;
+      engine->play2D("Scream1.mp3", true);
     break;
 
   case GLFW_KEY_W:

@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.0)
 project(curve_surfing VERSION 1.0 LANGUAGES C CXX)
 
+#[ irrklang ]
+set(IRRKLANG_DIR include/irrKlang-64bit-1.6.0)
+
+FIND_LIBRARY(IRRKLANG_LIBRARY
+        NAMES libIrrKlang.so
+        PATHS "${IRRKLANG_DIR}/bin/linux-gcc-64/")
+
 #[ OpenGL ]
 find_package(OpenGL REQUIRED)
 
@@ -64,6 +71,7 @@ configure_file(resources/shaders/basic_vs.glsl shaders/basic_vs.glsl COPYONLY)
 #[ Executable ]
 add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 
+
 #[ Definitions ]
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE -DGLFW_INCLUDE_NONE
@@ -94,8 +102,9 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE glad
     PRIVATE ${GLAD_LIBRARIES}
     PRIVATE ${CMAKE_DL_LIBS}
-    #PRIVATE include/irrKlang-64bit-1.6.0/lib/Winx64-visualStudio
-    #PRIVATE -lIrrKlang
+    #PRIVATE irrKlang
+    PRIVATE ${IRRKLANG_LIBRARY}
+    PRIVATE ${CMAKE_DL_LIBS}
     )
 
 target_include_directories(${PROJECT_NAME}
@@ -104,9 +113,8 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE include/math
     PRIVATE include/opengl
     PRIVATE include/scene
-    PRIVATE include/irrKlang-64bit-1.6.0/include
-    #PRIVATE include/irrKlang-64bit-1.6.0/bin/winx64-visualStudio
-    PRIVATE include/irrKlang-64bit-1.6.0/bin/linux-gcc-64
+    #PRIVATE include/irrKlang-64bit-1.6.0/include
+    PRIVATE ${IRRKLANG_DIR}/include
     PRIVATE external
     PRIVATE ${GLFW_DIR}/include
     PRIVATE ${GLAD_DIR}/include

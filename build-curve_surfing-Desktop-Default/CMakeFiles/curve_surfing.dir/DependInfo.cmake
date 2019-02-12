@@ -29,7 +29,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/opengl"
   "/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/scene"
   "/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/include"
-  "/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/include/irrKlang-64bit-1.6.0/bin/linux-gcc-64"
   "/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external"
   "/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glfw/include"
   "/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing/external/glad/include"
