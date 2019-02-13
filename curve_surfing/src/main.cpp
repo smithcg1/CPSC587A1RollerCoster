@@ -79,6 +79,9 @@ struct RenderableLine {
 
 openGL::RenderableMesh g_meshData;
 openGL::RenderableMesh g_meshData2;
+openGL::RenderableMesh g_meshData3;
+openGL::RenderableMesh g_meshData4;
+openGL::RenderableMesh g_meshData5;
 openGL::RenderableLine g_curveData;
 
 // Curve geometry for simulation
@@ -120,20 +123,22 @@ float WIN_FAR = 100.f;
 unsigned int lastTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 unsigned int currentTime = lastTime;
 float fps = 60;
-
-float arcLengthS = 0.01;
+int sampleDistance = 5;
+float arcLengthS = 0.020;
 bool resetVel = true;
 
 float scale = 1;
-float rollerCosterH = 35;
+float rollerCosterH = 34;
 float grav = (9.81)/(fps*fps);
 //std::string g_curveFilePath = "./curves/RollerCosterTrack.obj";
-std::string g_curveFilePath = "./curves/RollerCosterTrackv2DemonHorn.obj";
+std::string g_curveFilePath = "./curves/RollerCosterTrackv2DemonHornLoop.obj";
+//std::string g_curveFilePath = "./curves/RollerCosterTrackv2DemonHornTest.obj";
 
 math::Vec3f gravMat = {0, -grav, 0};
 float mass = 1;
 
-float vel = 0.01;
+float constantVel = 5/fps;
+float vel = constantVel;
 
 
 
@@ -152,9 +157,7 @@ math::Vec3f tangentN = math::Vec3f{0,0,1};
 
 math::Vec3f lastPosition;
 math::Vec3f currentPosition;
-math::Vec3f lastTangent;
 
-float constantVel = 5/fps;
 
 int cameraMode = 0;         //1 is free,    2 is cinamatic,    3 is passenger
 int cartCheckpoint = 1;
@@ -274,7 +277,7 @@ void displayFunc() {
 
 void animate(int vertexID) {
   using namespace openGL;
-  math::Vec3f pos = g_curve[vertexID];
+  math::Vec3f pos = g_curve[vertexID] + normalN*carH*scale;
 
   g_meshData.modelMatrix = TRMatrix( tangentN,  normalN, binormalN,pos) * UniformScaleMatrix(scale);
 }
@@ -299,14 +302,17 @@ void oncePerFrame() {
   lastPosition = g_curve[curveVertexID];
 
   //Move cart along track
-  curveVertexID += vel/arcLengthS;
+  curveVertexID += (vel)/arcLengthS;
   currentPosition = g_curve[curveVertexID];
   std::cout<<"CurveID: " << curveVertexID <<"/"<<g_curve.pointCount() << std::endl;
 
   updateVel(curveVertexID);
-  int nextPoint = ((int)(curveVertexID+vel/arcLengthS))%g_curve.pointCount();
-  //updateBasisVectors(lastPosition, g_curve[curveVertexID], g_curve[nextPoint]);
-  updateBasisVectors(g_curve[(curveVertexID-1)%g_curve.pointCount()], g_curve[curveVertexID], g_curve[(curveVertexID+1)%g_curve.pointCount()]);
+
+  int lastPoint = curveVertexID-sampleDistance;
+  int nextPoint = ((int)(curveVertexID+sampleDistance))%g_curve.pointCount();
+  if(curveVertexID-sampleDistance < 0){lastPoint = g_curve.pointCount() - sampleDistance;}
+
+  updateBasisVectors(g_curve[lastPoint], g_curve[curveVertexID], g_curve[nextPoint]);
 
   //Loop back to start of track
   if (curveVertexID >= g_curve.pointCount())
@@ -334,7 +340,7 @@ void updateCamera(){
 
     else if(cameraMode == 3)
     {
-        g_camera.m_pos = currentPosition + normalN*0.5*scale;
+        g_camera.m_pos = currentPosition + normalN*0.7*scale;
         g_camera.m_forward = tangentN;
         g_camera.m_up = normalN;
       }
@@ -344,12 +350,12 @@ void updateCamera(){
 
 
 void updateCheckpoint(int curveVertexID){
-    if(curveVertexID <= 8600){
+    if(curveVertexID <= 4300){
         //std::cout<<"Locked Speed"<< std::endl;
         cartCheckpoint = 1;
     }
 
-    else if(curveVertexID <= 26300){
+    else if(curveVertexID <= 13617){
         //std::cout<<"Free Speed"<< std::endl;
         if(cartCheckpoint == 1)
             engine->play2D("external/Scream4.wav", false);
@@ -367,15 +373,10 @@ void updateVel(uint32_t curveVertexID){
     if(cartCheckpoint == 1){
         if (vel < constantVel)
           vel = vel*1.005;
-        resetVel = true;
     }
 
     //Physics simulation
     else if (cartCheckpoint == 2){
-        if(resetVel){
-            vel = constantVel;
-            resetVel = false;
-        }
         //std::cout<<"Because of grav: " << grav << "  and deltaH: " << -tangent[1] << std::endl;
         vel = (sqrt(2*grav*(rollerCosterH-g_curve[curveVertexID][1])));
     }
@@ -383,11 +384,12 @@ void updateVel(uint32_t curveVertexID){
     //Ending slowdown
     else{
         if (vel > constantVel)
-            vel = vel*0.70;
+            vel = vel*0.95;
     }
+
+    //vel = constantVel;
     std::cout<<"Current speed: " << vel << std::endl;
 }
-
 
 void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::Vec3f nextPoint){
     math::Vec3f lastTangent = currentPoint - lastPoint;
@@ -397,8 +399,8 @@ void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::V
     lastTangent = math::normalized(lastTangent)*vel;
     tangent = math::normalized(tangent)*vel;
 
-    std::cout << "Last point: [" << lastPoint[0] << "," << lastPoint[1] << "," << lastPoint[2] << "]" << std::endl;
-    std::cout << "This point: [" << currentPoint[0] << "," << currentPoint[1] << "," << currentPoint[2] << "]" << std::endl;
+    //std::cout << "Last point: [" << lastPoint[0] << "," << lastPoint[1] << "," << lastPoint[2] << "]" << std::endl;
+    //std::cout << "This point: [" << currentPoint[0] << "," << currentPoint[1] << "," << currentPoint[2] << "]" << std::endl;
 
     math::Vec3f perpAccel = tangent - lastTangent;
 
@@ -408,9 +410,13 @@ void updateBasisVectors(math::Vec3f lastPoint, math::Vec3f currentPoint, math::V
     binormalN = math::normalized(cross(tangentN, normalN));
     normalN = math::normalized(cross(binormalN, tangentN));
 
-    std::cout << "Normalized tangent vector: [" << tangentN[0] << "," << tangentN[1] << "," << tangentN[2] << "]" << std::endl;
-    std::cout << "Normalized normal vector: [" << normalN[0] << "," << normalN[1] << "," << normalN[2] << "]" << std::endl;
+    //std::cout << "Binormal of track: " << binormalN[0] << " " << binormalN[1] << " " << binormalN[2] << std::endl;
+    //std::cout << "Normal of track: " <<normalN[0] << " " << normalN[1] << " " << normalN[2] << std::endl;
+
+    //std::cout << "Normalized tangent vector: [" << tangentN[0] << "," << tangentN[1] << "," << tangentN[2] << "]" << std::endl;
+    //std::cout << "Normalized normal vector: [" << normalN[0] << "," << normalN[1] << "," << normalN[2] << "]" << std::endl;
 }
+
 
 
 bool loadMeshGeometryToGPU() {
@@ -435,6 +441,11 @@ bool loadMeshGeometryToGPU() {
   glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                sizeof(GLuint) * g_meshData.indicesCount, indices.data(),
                GL_STATIC_DRAW);
+
+  g_meshData2 = g_meshData;
+  g_meshData3 = g_meshData;
+  g_meshData4 = g_meshData;
+  g_meshData5 = g_meshData;
 
   return true;
 }
@@ -533,22 +544,22 @@ bool loadCurveGeometryToGPU(math::geometry::Curve curve) {
 math::geometry::Curve arcLengthParam(math::geometry::Curve curve, float deltaS){
     std::cout<<"Starting with " << curve.pointCount() << " points"<<std::endl;
 
-    int deltaTSubdivCount = 14;
+    int deltaTSubdivCount = 15;
     math::geometry::Points temp;
     curve = math::geometry::cubicSubdivideCurve(curve, deltaTSubdivCount);
 
     int counter = 0;
     //math::Vec3f
-    float distanceTally;
+    float distanceTally = 0.f;
     for (int i=0; i<curve.pointCount(); i++){
 
         math::Vec3f directionVec;
-        directionVec = curve[(i+1)%curve.pointCount()] - curve[i%curve.pointCount()];
+        directionVec = curve[(i+1)%curve.pointCount()] - curve[i];
 
         distanceTally += length(directionVec);
 
         if(distanceTally >= deltaS){
-            distanceTally = 0;
+            distanceTally = 0.f;
             temp.push_back(curve[i]);
             counter++;
         }
@@ -674,24 +685,24 @@ bool init() {
   }
 
   int max = g_curve.pointCount();
-  math::Vec3f lastPoint = g_curve.m_points[max-1];
+  math::Vec3f lastPoint = g_curve.m_points[max-sampleDistance];
   math::Vec3f currentPoint;
   math::Vec3f nextPoint;
   for(int i = 0; i < g_curve.pointCount(); i++){
-        currentPoint = g_curve.m_points[(i)%max];
-        nextPoint = g_curve.m_points[(i+1)%max];
+        currentPoint = g_curve.m_points[(i)];
+        nextPoint = g_curve.m_points[(i+sampleDistance)%max];
 
         updateCheckpoint(i);
         updateVel(i);
         updateBasisVectors(lastPoint, currentPoint, nextPoint);
 
-        //std::cout << "Binormal of track: " << binormalN[0] << " " << binormalN[1] << " " << binormalN[2] << std::endl;
 
-        math::Vec3f leftTrackPoint = g_curve.m_points[i] - normalN*carH*scale + binormalN*carW*scale;
-        math::Vec3f rightTrackPoint = g_curve.m_points[i] - normalN*carH*scale - binormalN*carW*scale;
 
-        math::Vec3f leftFutureTrackPoint = g_curve.m_points[i+15] - normalN*carH*scale + binormalN*carW*scale;
-        math::Vec3f rightFutureTrackPoint = g_curve.m_points[i+15] - normalN*carH*scale - binormalN*carW*scale;
+        math::Vec3f leftTrackPoint = g_curve.m_points[i] + binormalN*carW*scale;
+        math::Vec3f rightTrackPoint = g_curve.m_points[i] - binormalN*carW*scale;
+
+        math::Vec3f leftFutureTrackPoint = g_curve.m_points[i+15] + binormalN*carW*scale;
+        math::Vec3f rightFutureTrackPoint = g_curve.m_points[i+15] - binormalN*carW*scale;
 
         g_curveLT.m_points.push_back(leftTrackPoint);
         g_curveRT.m_points.push_back(rightTrackPoint);
@@ -802,6 +813,7 @@ int main(int argc, char **argv) {
           currentTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
           if(currentTime >= lastTime+((1/fps)*1000))    //FPS lock
             oncePerFrame();
+            lastTime = currentTime;
       }
 
       displayFunc();
