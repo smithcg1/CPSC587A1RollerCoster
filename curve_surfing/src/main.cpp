@@ -160,6 +160,7 @@ math::Vec3f currentPosition;
 
 
 int cameraMode = 0;         //1 is free,    2 is cinamatic,    3 is passenger
+int cameraCheckpoint = 0;
 int cartCheckpoint = 1;
 
 //==================== FUNCTION DECLARATIONS ====================//
@@ -236,8 +237,7 @@ void displayFunc() {
                  (void *)0);
 
 
-  /*
-  g_MVP = g_P * g_V * g_meshData.modelMatrix;
+  g_MVP = g_P * g_V * g_meshData2.modelMatrix;
   program.setUniformMat4f("MVP", g_MVP,
                           true); // true, transpose for stupid OpenGL
 
@@ -247,8 +247,18 @@ void displayFunc() {
   // Draw mesh, start at vertex 0, draw a # of them
   glDrawElements(GL_TRIANGLE_STRIP, g_meshData.indicesCount, GL_UNSIGNED_INT,
                  (void *)0);
-  */
 
+
+  g_MVP = g_P * g_V * g_meshData3.modelMatrix;
+  program.setUniformMat4f("MVP", g_MVP,
+                          true); // true, transpose for stupid OpenGL
+
+  // Use VAO that holds buffer bindings
+  // and attribute config of buffers
+  glBindVertexArray(g_meshData.vaoID);
+  // Draw mesh, start at vertex 0, draw a # of them
+  glDrawElements(GL_TRIANGLE_STRIP, g_meshData.indicesCount, GL_UNSIGNED_INT,
+                 (void *)0);
 
 
 
@@ -279,7 +289,30 @@ void animate(int vertexID) {
   using namespace openGL;
   math::Vec3f pos = g_curve[vertexID] + normalN*carH*scale;
 
+  //tangentN and binormalN are defined backwards because the cart was defined sidways
   g_meshData.modelMatrix = TRMatrix( tangentN,  normalN, binormalN,pos) * UniformScaleMatrix(scale);
+
+
+  vertexID -= 150;
+  if(vertexID < 0){vertexID = g_curve.pointCount() + vertexID;}
+  int lastPoint = vertexID-sampleDistance;
+  int nextPoint = ((int)(vertexID+sampleDistance))%g_curve.pointCount();
+  if(vertexID-sampleDistance < 0){lastPoint = g_curve.pointCount() + (vertexID-sampleDistance);}
+
+
+  updateBasisVectors(g_curve[lastPoint], g_curve[vertexID], g_curve[nextPoint]);
+  pos = g_curve[vertexID] + normalN*carH*scale;
+  g_meshData2.modelMatrix = TRMatrix( tangentN,  normalN, binormalN,pos) * UniformScaleMatrix(scale);
+
+  vertexID -= 150;
+  if(vertexID < 0){vertexID =g_curve.pointCount() + vertexID;}
+  lastPoint = vertexID-sampleDistance;
+  nextPoint = ((int)(vertexID+sampleDistance))%g_curve.pointCount();
+  if(vertexID-sampleDistance < 0){lastPoint = g_curve.pointCount() + (vertexID-sampleDistance);}
+
+  updateBasisVectors(g_curve[lastPoint], g_curve[vertexID], g_curve[nextPoint]);
+  pos = g_curve[vertexID] + normalN*carH*scale;
+  g_meshData3.modelMatrix = TRMatrix( tangentN,  normalN, binormalN,pos) * UniformScaleMatrix(scale);
 }
 
 //Binormal, normal, tangent, position
@@ -296,6 +329,18 @@ math::Mat4f TRMatrix(math::Vec3f const &binormal, math::Vec3f const &normal, mat
 }
 
 
+int audioFlag  = 0;
+void playSound(int curveVertexID){
+    if(curveVertexID <= 4200)
+        audioFlag = 0;
+
+    else if(curveVertexID <= 13617){
+        if (audioFlag==0)
+            engine->play2D("external/Scream4.wav", false);
+        audioFlag = 1;
+    }
+}
+
 void oncePerFrame() {
   static uint32_t curveVertexID = 0;
 
@@ -310,7 +355,7 @@ void oncePerFrame() {
 
   int lastPoint = curveVertexID-sampleDistance;
   int nextPoint = ((int)(curveVertexID+sampleDistance))%g_curve.pointCount();
-  if(curveVertexID-sampleDistance < 0){lastPoint = g_curve.pointCount() - sampleDistance;}
+  if(curveVertexID-sampleDistance < 0){lastPoint = g_curve.pointCount() - (curveVertexID-sampleDistance);}
 
   updateBasisVectors(g_curve[lastPoint], g_curve[curveVertexID], g_curve[nextPoint]);
 
@@ -320,6 +365,7 @@ void oncePerFrame() {
 
   updateCheckpoint(curveVertexID);
   updateCamera();
+  playSound(curveVertexID);
 
   animate(curveVertexID);
 }
@@ -333,9 +379,21 @@ void updateCamera(){
 
     if(cameraMode == 2)
     {
-        g_camera.m_pos = math::Vec3f{0.0, 0.0f, 0.0f};
         g_camera.m_forward = math::normalized(currentPosition - g_camera.m_pos);
         g_camera.m_up = math::Vec3f{0.0, 1.0f, 0.0f};
+
+        if(cameraCheckpoint == 0)
+            g_camera.m_pos = math::Vec3f{0.0, 2.0f, 5.0f};
+
+        if(cameraCheckpoint == 1)
+            g_camera.m_pos = math::Vec3f{-32.0, 25.0f, -20.0f};
+
+        if(cameraCheckpoint == 2)
+            g_camera.m_pos = math::Vec3f{-10.0, 35.0f, -30.0f};
+
+        if(cameraCheckpoint == 3)
+            g_camera.m_pos = math::Vec3f{8.0, 5.0f, -40.0f};
+
     }
 
     else if(cameraMode == 3)
@@ -349,6 +407,7 @@ void updateCamera(){
 }
 
 
+
 void updateCheckpoint(int curveVertexID){
     if(curveVertexID <= 4300){
         //std::cout<<"Locked Speed"<< std::endl;
@@ -356,17 +415,34 @@ void updateCheckpoint(int curveVertexID){
     }
 
     else if(curveVertexID <= 13617){
-        //std::cout<<"Free Speed"<< std::endl;
-        if(cartCheckpoint == 1)
-            engine->play2D("external/Scream4.wav", false);
+        //std::cout<<"Free Speed"<< std::endl;            
         cartCheckpoint = 2;
     }
     else{
         //std::cout<<"Locked Speed"<< std::endl;
         cartCheckpoint = 3;
     }
-    std::cout<< "Curve ID of: " << curveVertexID << "  is in section: " << cartCheckpoint << std::endl;
+
+
+
+    if(curveVertexID <= 1780){
+        cameraCheckpoint = 0;
+    }
+    else if(curveVertexID <= 3500){
+        cameraCheckpoint = 1;
+    }
+    else if(curveVertexID <= 4200){
+        cameraCheckpoint = 2;
+    }
+    else if(curveVertexID <= 11000){
+        cameraCheckpoint = 3;
+    }
+    else
+        cameraCheckpoint = 0;
 }
+
+
+
 
 void updateVel(uint32_t curveVertexID){
     //Initial climb
@@ -889,7 +965,7 @@ void windowKeyFunc(GLFWwindow *window, int key, int scancode, int action,
 
   case GLFW_KEY_1:
     cameraMode = 1;
-    g_camera.m_pos = math::Vec3f{0.0, 2.0f, 7.0f};
+    g_camera.m_pos = math::Vec3f{2.0, 20.0f, 50.0f};
     g_camera.m_forward = math::Vec3f{0.0, 0.0f, -1.0f};
     g_camera.m_up = math::Vec3f{0.0, 1.0f, 0.0f};;
     reloadViewMatrix();
