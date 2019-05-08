@@ -150,7 +150,28 @@ CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 CMAKE_PREFIX_PATH:STRING=
 
 //Value Computed by CMake
+CMAKE_PROJECT_DESCRIPTION:STATIC=
+
+//Value Computed by CMake
+CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
+
+//Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=curve_surfing
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION:STATIC=1.0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_MAJOR:STATIC=1
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_MINOR:STATIC=0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_PATCH:STATIC=
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_TWEAK:STATIC=
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -211,6 +232,24 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Path to a file.
+FONTCONFIG_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+FONTCONFIG_LIBRARY:FILEPATH=/usr/lib64/libfontconfig.so
+
+//Path to a file.
+FREETYPE_INCLUDE_DIR_freetype2:PATH=/usr/include/freetype2
+
+//Path to a file.
+FREETYPE_INCLUDE_DIR_ft2build:PATH=/usr/include/freetype2
+
+//Path to a library.
+FREETYPE_LIBRARY_DEBUG:FILEPATH=FREETYPE_LIBRARY_DEBUG-NOTFOUND
+
+//Path to a library.
+FREETYPE_LIBRARY_RELEASE:FILEPATH=/usr/lib64/libfreetype.so
+
 //Value Computed by CMake
 GLFW_BINARY_DIR:STATIC=/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default/external/glfw
 
@@ -268,6 +307,9 @@ OPENGL_opengl_LIBRARY:FILEPATH=/usr/lib64/libOpenGL.so
 
 //Path to a file.
 OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
 //Path to a program.
 ProcessorCount_cmd_getconf:FILEPATH=/usr/bin/getconf
@@ -359,6 +401,9 @@ X11_Xdmcp_INCLUDE_PATH:PATH=X11_Xdmcp_INCLUDE_PATH-NOTFOUND
 //Path to a library.
 X11_Xdmcp_LIB:FILEPATH=X11_Xdmcp_LIB-NOTFOUND
 
+//Path to a file.
+X11_Xext_INCLUDE_PATH:PATH=/usr/include
+
 //Path to a library.
 X11_Xext_LIB:FILEPATH=/usr/lib64/libXext.so
 
@@ -441,10 +486,22 @@ X11_Xscreensaver_LIB:FILEPATH=X11_Xscreensaver_LIB-NOTFOUND
 X11_Xshape_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a file.
+X11_Xss_INCLUDE_PATH:PATH=X11_Xss_INCLUDE_PATH-NOTFOUND
+
+//Path to a library.
+X11_Xss_LIB:FILEPATH=X11_Xss_LIB-NOTFOUND
+
+//Path to a file.
 X11_Xt_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
 X11_Xt_LIB:FILEPATH=/usr/lib64/libXt.so
+
+//Path to a file.
+X11_Xtst_INCLUDE_PATH:PATH=X11_Xtst_INCLUDE_PATH-NOTFOUND
+
+//Path to a library.
+X11_Xtst_LIB:FILEPATH=X11_Xtst_LIB-NOTFOUND
 
 //Path to a file.
 X11_Xutil_INCLUDE_PATH:PATH=/usr/include
@@ -455,8 +512,14 @@ X11_Xv_INCLUDE_PATH:PATH=X11_Xv_INCLUDE_PATH-NOTFOUND
 //Path to a library.
 X11_Xv_LIB:FILEPATH=X11_Xv_LIB-NOTFOUND
 
+//Path to a file.
+X11_Xxf86misc_INCLUDE_PATH:PATH=/usr/include
+
 //Path to a library.
 X11_Xxf86misc_LIB:FILEPATH=X11_Xxf86misc_LIB-NOTFOUND
+
+//Path to a file.
+X11_Xxf86vm_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
 X11_Xxf86vm_LIB:FILEPATH=/usr/lib64/libXxf86vm.so
@@ -470,17 +533,23 @@ X11_xf86misc_INCLUDE_PATH:PATH=/usr/include
 //Path to a file.
 X11_xf86vmode_INCLUDE_PATH:PATH=/usr/include
 
+//Path to a file.
+X11_xkbfile_INCLUDE_PATH:PATH=X11_xkbfile_INCLUDE_PATH-NOTFOUND
+
+//Path to a library.
+X11_xkbfile_LIB:FILEPATH=X11_xkbfile_LIB-NOTFOUND
+
 //Value Computed by CMake
 curve_surfing_BINARY_DIR:STATIC=/home/uga/smithcg/Desktop/CurveSurfing/build-curve_surfing-Desktop-Default
 
 //Value Computed by CMake
 curve_surfing_SOURCE_DIR:STATIC=/home/uga/smithcg/Desktop/CurveSurfing/curve_surfing
 
-//Dependencies for target
-glad_LIB_DEPENDS:STATIC=
+//Path to a library.
+pkgcfg_lib_PKG_FONTCONFIG_fontconfig:FILEPATH=/usr/lib64/libfontconfig.so
 
-//Dependencies for target
-glfw_LIB_DEPENDS:STATIC=
+//Path to a library.
+pkgcfg_lib_PKG_FONTCONFIG_freetype:FILEPATH=/usr/lib64/libfreetype.so
 
 
 ########################
@@ -494,9 +563,9 @@ CMAKE_CACHEFILE_DIR:INTERNAL=/home/uga/smithcg/Desktop/CurveSurfing/build-curve_
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=11
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=14
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=2
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=0
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
 CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
@@ -655,7 +724,19 @@ FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib64/libOpenGL.so][/usr/lib6
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding X11
-FIND_PACKAGE_MESSAGE_DETAILS_X11:INTERNAL=[/usr/lib64/libX11.so][/usr/include]
+FIND_PACKAGE_MESSAGE_DETAILS_X11:INTERNAL=[/usr/include][/usr/lib64/libX11.so][c ][v()]
+//ADVANCED property for variable: FONTCONFIG_INCLUDE_DIR
+FONTCONFIG_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FONTCONFIG_LIBRARY
+FONTCONFIG_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FREETYPE_INCLUDE_DIR_freetype2
+FREETYPE_INCLUDE_DIR_freetype2-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FREETYPE_INCLUDE_DIR_ft2build
+FREETYPE_INCLUDE_DIR_ft2build-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FREETYPE_LIBRARY_DEBUG
+FREETYPE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FREETYPE_LIBRARY_RELEASE
+FREETYPE_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //Build the GLFW documentation
 GLFW_BUILD_DOCS:INTERNAL=OFF
 //Build the GLFW example programs
@@ -684,6 +765,42 @@ OPENGL_glx_LIBRARY-ADVANCED:INTERNAL=1
 OPENGL_opengl_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_xmesa_INCLUDE_DIR
 OPENGL_xmesa_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+PKG_FONTCONFIG_CFLAGS:INTERNAL=-I/usr/include/freetype2;-I/usr/include/libpng16;-I/usr/include/uuid
+PKG_FONTCONFIG_CFLAGS_I:INTERNAL=
+PKG_FONTCONFIG_CFLAGS_OTHER:INTERNAL=
+PKG_FONTCONFIG_FOUND:INTERNAL=1
+PKG_FONTCONFIG_INCLUDEDIR:INTERNAL=/usr/include
+PKG_FONTCONFIG_INCLUDE_DIRS:INTERNAL=/usr/include/freetype2;/usr/include/libpng16;/usr/include/uuid
+PKG_FONTCONFIG_LDFLAGS:INTERNAL=-lfontconfig;-lfreetype
+PKG_FONTCONFIG_LDFLAGS_OTHER:INTERNAL=
+PKG_FONTCONFIG_LIBDIR:INTERNAL=/usr/lib64
+PKG_FONTCONFIG_LIBRARIES:INTERNAL=fontconfig;freetype
+PKG_FONTCONFIG_LIBRARY_DIRS:INTERNAL=
+PKG_FONTCONFIG_LIBS:INTERNAL=
+PKG_FONTCONFIG_LIBS_L:INTERNAL=
+PKG_FONTCONFIG_LIBS_OTHER:INTERNAL=
+PKG_FONTCONFIG_LIBS_PATHS:INTERNAL=
+PKG_FONTCONFIG_PREFIX:INTERNAL=/usr
+PKG_FONTCONFIG_STATIC_CFLAGS:INTERNAL=-I/usr/include/freetype2;-I/usr/include/libpng16;-I/usr/include/uuid
+PKG_FONTCONFIG_STATIC_CFLAGS_I:INTERNAL=
+PKG_FONTCONFIG_STATIC_CFLAGS_OTHER:INTERNAL=
+PKG_FONTCONFIG_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/freetype2;/usr/include/libpng16;/usr/include/uuid
+PKG_FONTCONFIG_STATIC_LDFLAGS:INTERNAL=-lfontconfig;-lfreetype;-lz;-lbz2;-lpng16;-lm;-lm;-lz;-luuid;-lexpat
+PKG_FONTCONFIG_STATIC_LDFLAGS_OTHER:INTERNAL=
+PKG_FONTCONFIG_STATIC_LIBDIR:INTERNAL=
+PKG_FONTCONFIG_STATIC_LIBRARIES:INTERNAL=fontconfig;freetype;z;bz2;png16;m;m;z;uuid;expat
+PKG_FONTCONFIG_STATIC_LIBRARY_DIRS:INTERNAL=
+PKG_FONTCONFIG_STATIC_LIBS:INTERNAL=
+PKG_FONTCONFIG_STATIC_LIBS_L:INTERNAL=
+PKG_FONTCONFIG_STATIC_LIBS_OTHER:INTERNAL=
+PKG_FONTCONFIG_STATIC_LIBS_PATHS:INTERNAL=
+PKG_FONTCONFIG_VERSION:INTERNAL=2.13.0
+PKG_FONTCONFIG_fontconfig_INCLUDEDIR:INTERNAL=
+PKG_FONTCONFIG_fontconfig_LIBDIR:INTERNAL=
+PKG_FONTCONFIG_fontconfig_PREFIX:INTERNAL=
+PKG_FONTCONFIG_fontconfig_VERSION:INTERNAL=
 //ADVANCED property for variable: ProcessorCount_cmd_getconf
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
@@ -744,6 +861,8 @@ X11_Xdamage_LIB-ADVANCED:INTERNAL=1
 X11_Xdmcp_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xdmcp_LIB
 X11_Xdmcp_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xext_INCLUDE_PATH
+X11_Xext_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xext_LIB
 X11_Xext_LIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xfixes_INCLUDE_PATH
@@ -798,18 +917,30 @@ X11_Xscreensaver_INCLUDE_PATH-ADVANCED:INTERNAL=1
 X11_Xscreensaver_LIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xshape_INCLUDE_PATH
 X11_Xshape_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xss_INCLUDE_PATH
+X11_Xss_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xss_LIB
+X11_Xss_LIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xt_INCLUDE_PATH
 X11_Xt_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xt_LIB
 X11_Xt_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xtst_INCLUDE_PATH
+X11_Xtst_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xtst_LIB
+X11_Xtst_LIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xutil_INCLUDE_PATH
 X11_Xutil_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xv_INCLUDE_PATH
 X11_Xv_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xv_LIB
 X11_Xv_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xxf86misc_INCLUDE_PATH
+X11_Xxf86misc_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xxf86misc_LIB
 X11_Xxf86misc_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xxf86vm_INCLUDE_PATH
+X11_Xxf86vm_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_Xxf86vm_LIB
 X11_Xxf86vm_LIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_dpms_INCLUDE_PATH
@@ -818,4 +949,15 @@ X11_dpms_INCLUDE_PATH-ADVANCED:INTERNAL=1
 X11_xf86misc_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_xf86vmode_INCLUDE_PATH
 X11_xf86vmode_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_xkbfile_INCLUDE_PATH
+X11_xkbfile_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_xkbfile_LIB
+X11_xkbfile_LIB-ADVANCED:INTERNAL=1
+__pkg_config_arguments_PKG_FONTCONFIG:INTERNAL=QUIET;fontconfig
+__pkg_config_checked_PKG_FONTCONFIG:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_PKG_FONTCONFIG_fontconfig
+pkgcfg_lib_PKG_FONTCONFIG_fontconfig-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_PKG_FONTCONFIG_freetype
+pkgcfg_lib_PKG_FONTCONFIG_freetype-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib64
 
